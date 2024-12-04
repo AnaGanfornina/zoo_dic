@@ -69,6 +69,8 @@ def ask_age()->list:
     Pedir la edad hasta que el usuario introduzca una cadena vacía
     """
     ages = []
+   
+    
     while True:
         age = (input("¿Que edad tiene?: ")) 
         if age == "":
@@ -116,8 +118,17 @@ def calculate_total(ages:list):
     
 
 #comienza el programa
-  
-ages = ask_age()
-calculate_total(ages)
+
+while True :
+
+    ages = ask_age()
+    calculate_total(ages)
+
+    go_on = input("¿Desea continuar?[s/n] ").strip().lower()
+
+    if go_on == "n":
+        print("Gracias por su visita")
+        break
+
 
 
