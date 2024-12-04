@@ -22,17 +22,19 @@ def calculate_ticket(age:int)->int:
     Calcula el preico de la entrada en función de la edad
     """
     price = 0
-    ticket = FREE
+
+    ticket = Entradas.FREE
    
     if 3 <= age <= 12:
         price = 14
-        ticket = CHILD
+        ticket = Entradas.CHILD
     elif 13 > age < 65:
         price = 23
-        ticket = ADULT
+        ticket = Entradas.ADULT
     elif age <= 65:
         price = 18
-        ticket = YAYO
+        ticket = Entradas.YAYO
+ 
     
     
 
@@ -96,11 +98,15 @@ def calculate_total(ages:list)->list:
  
     return precio_total,count_ticket,total_ticket   #revisa que devuelve esto para poder pasarselo a  to_print
 
-def to_print(ages):
-    precio_total = calculate_total(ages) #esto va a cascar con el tema listas
+def to_print(precio_total,count_ticket,total_ticket ):
+    
 
     #prueba a usar un enumerate en función de los tipos del enum
     #print(f"Numero de entradas: {num_entradas}")
+
+    for num in range(3):
+        print(f"{count_ticket[num]} entradas gratis = {total_ticket[num]} ")
+    
     print(f"Total a pagar....{precio_total}€")
 
 
@@ -111,5 +117,6 @@ def to_print(ages):
 #comienza el programa
   
 ages = ask_age()
-to_print(ages)
+calculos = calculate_total(ages)
+to_print(calculos)
 
