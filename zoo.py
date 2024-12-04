@@ -23,17 +23,17 @@ def calculate_ticket(age:int)->int:
     """
     price = 0
 
-    ticket = Entradas.FREE
+    ticket = Entradas.FREE.value
    
     if 3 <= age <= 12:
         price = 14
-        ticket = Entradas.CHILD
+        ticket = Entradas.CHILD.value
     elif 13 > age < 65:
         price = 23
-        ticket = Entradas.ADULT
+        ticket = Entradas.ADULT.value
     elif age <= 65:
         price = 18
-        ticket = Entradas.YAYO
+        ticket = Entradas.YAYO.value
  
     
     
@@ -70,18 +70,30 @@ def ask_age()->list:
     """
     ages = []
     while True:
-        age = (input("¿Que edad tiene: ")) 
+        age = (input("¿Que edad tiene?: ")) 
         if age == "":
             break
         else:
             if validate(age):
-                new_age = calculate_ticket(int(age)) #recuerda poner ese int en algun otro sitio para que no tengas que ponerlo siempre en age
+                new_age = calculate_ticket(int(age)) 
                 ages.append(new_age)
 
     return ages
 
+
+def to_print(precio_total,count_ticket,total_ticket ):
+    
+
+    #prueba a usar un enumerate en función de los tipos del enum
+  
+    
+    for num in range(3):
+        print(f"{count_ticket[num]} entradas {Entradas(num).name} = {total_ticket[num]}€ ")
+    
+    print(f"Precio total del grupo....{precio_total}€")
+
       
-def calculate_total(ages:list)->list:
+def calculate_total(ages:list):
     """
     Recibe una lista de edades y tipos, y calcula el total de entradas
     """
@@ -96,18 +108,7 @@ def calculate_total(ages:list)->list:
         count_ticket[tipo] += 1
         total_ticket[tipo] += precio
  
-    return precio_total,count_ticket,total_ticket   #revisa que devuelve esto para poder pasarselo a  to_print
-
-def to_print(precio_total,count_ticket,total_ticket ):
-    
-
-    #prueba a usar un enumerate en función de los tipos del enum
-    #print(f"Numero de entradas: {num_entradas}")
-
-    for num in range(3):
-        print(f"{count_ticket[num]} entradas gratis = {total_ticket[num]} ")
-    
-    print(f"Total a pagar....{precio_total}€")
+    return to_print(precio_total,count_ticket,total_ticket)   #revisa que devuelve esto para poder pasarselo a  to_print
 
 
 
@@ -117,6 +118,6 @@ def to_print(precio_total,count_ticket,total_ticket ):
 #comienza el programa
   
 ages = ask_age()
-calculos = calculate_total(ages)
-to_print(calculos)
+calculate_total(ages)
+
 
